@@ -66,7 +66,7 @@ class Window(QMainWindow):
     def initUI(self):
         self.setGeometry(100, 100, self.window_width, self.window_height)
         self.setFixedSize(self.window_width, self.window_height)
-        self.setWindowTitle('Git и желтые окружности')
+        self.setWindowTitle('Git и случайные окружности')
         self.pb_create_circle.clicked.connect(self.create_circles)
 
     def create_circles(self):
@@ -81,8 +81,11 @@ class Window(QMainWindow):
             qp.end()
 
     def draw_flag(self, qp):
+        circle_color_range = [0, 255]
         for _ in range(random.randint(*self.circle_count_range)):
-            qp.setBrush(QColor(255, 255, 0))
+            qp.setBrush(QColor(random.randint(*circle_color_range),
+                               random.randint(*circle_color_range),
+                               random.randint(*circle_color_range)))
             circle_radius = random.randint(*self.circle_radius_range)
             qp.drawEllipse(random.randint(*self.circle_x_range), random.randint(*self.circle_y_range), circle_radius, circle_radius)
 
